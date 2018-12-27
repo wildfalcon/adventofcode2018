@@ -2,7 +2,7 @@
 class Day0102
   def initialize
     @current = 0
-    @previous = []
+    @previous = {}
     @repeated_frequency = nil
   end
 
@@ -14,15 +14,14 @@ class Day0102
   end
 
   def check_for_frequency_repeat(changes)
-    puts "scanning #{changes.count} frequencies starting at #{@current}"
     changes.each do |frequency_shift|
       @current += frequency_shift
 
-      if @previous.include?(@current)
+      if @previous[@current]
         @repeated_frequency = @current
         break
       else
-        @previous.push @current
+        @previous[@current] = true
       end
     end
   end
